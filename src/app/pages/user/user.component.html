@@ -1,0 +1,186 @@
+<style>
+  #loader {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+
+  @-webkit-keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+<div class=" content">
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h3 class=" title">New Gate Pass Form</h3>
+        </div>
+        <div class=" card-body">
+          <form>
+            <div class=" row">
+              <div class=" col-md-6 pr-md-1">
+                <div class=" form-group">
+                  <label style="color: wheat"> Party Name </label>
+                  <input
+                    [(ngModel)]="partyname"
+                    name="partyname"
+                    class=" form-control"
+                    placeholder="Party Name"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div class=" col-md-2 pl-md-1"></div>
+              <div class=" col-md-4 pl-md-1">
+                <div class="form-group">
+                  <label class="control-label" style="color: wheat" for="user_dept"
+                    >Date (DD-MM-YYYY)</label
+                  ><br />
+                  <select
+                    [(ngModel)]="date"
+                    style="font-size: 20px;"
+                    name="dept"
+                  >
+                    <option value="2019-12-24">24-12-2019</option>
+                    <option value="2019-12-25">25-12-2019</option>
+                    <option value="2019-12-26">26-12-2019</option>
+                    <option value="2019-12-27">27-12-2019</option>
+                    <option value="2019-12-28">28-12-2019</option>
+                    <option value="2019-12-29">29-12-2019</option>
+                    <option value="2019-12-30">30-12-2019</option>
+                  </select>
+                  <br /><br />
+                  <!-- <input class="form-control" id="user_dept" name="user_dept" type="submit"> -->
+                  <!-- <input class="form-control" id="user_dept" name="user_dept" type="password"> -->
+                </div>
+              </div>
+            </div>
+            <div class=" row">
+              <div class=" col-md-4 pr-md-1">
+                <div class=" form-group">
+                  <label style="color: wheat"> Vehicle Number </label>
+                  <input
+                    [id] = i
+                    name="vehicleno"
+                    class=" form-control"
+                    placeholder="Vehicle No."
+                    type="text"
+                    style="margin: 1%;"
+                    *ngFor="let item of items, let i=index"
+                  />
+                </div>
+              </div>
+              <div class=" col-md-4" style="padding-top: 2%;">
+                <button class="btn btn-fill btn-danger add" (click)="add()">ADD</button>&nbsp;
+                <button class="btn btn-fill btn-danger add" (click)="delete()">DELETE</button>
+              </div>
+              <div class=" col-md-4 pl-md-1">
+                <div class="form-group">
+                  <label class="control-label" style="color: wheat" for="user_dept">Department</label
+                  ><br />
+                  <select
+                    [(ngModel)]="department"
+                    style="font-size: 20px;"
+                    name="dept"
+                  >
+                    <option value="Creatives">Creatives</option>
+                    <option value="Fnb">Fnb</option>
+                    <option value="Compi">Compi</option>
+                    <option value="Services">Services</option>
+                    <option value="Hospi">Hospi</option>
+                    <option value="Horizons">Horizons</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Media">Media</option>
+                    <option value="Informals">Informals</option>
+                    <option value="Pronites">Pronites</option>
+                    <option value="Security">Security</option>
+                  </select>
+                  <br /><br />
+                  <!-- <input class="form-control" id="user_dept" name="user_dept" type="submit"> -->
+                  <!-- <input class="form-control" id="user_dept" name="user_dept" type="password"> -->
+                </div>
+              </div>
+            </div>
+            <div class=" row">
+              <div class=" col-md-6">
+                <div class=" form-group">
+                  <label style="color: wheat">
+                    Names of Visitors </label
+                  >
+                  <input
+                    [id] = -j-1
+                    name="namesofvisitors"
+                    class=" form-control"
+                    placeholder="Names of Visitors"
+                    type="text"
+                    style="margin: 1%;"
+                    *ngFor="let name of names, let j=index"
+                  />
+                </div>
+              </div>
+              <div class=" col-md-4" style="padding-top: 2%;">
+                <button class="btn btn-fill btn-danger add" (click)="addname()">ADD</button>&nbsp;
+                <button class="btn btn-fill btn-danger add" (click)="deletename()">DELETE</button>
+              </div>
+            </div>
+            <div class=" row">
+              <div class=" col-md-12">
+                <div class=" form-group">
+                  <label style="color: wheat"> Details of Equipments </label>
+                  <input
+                    [(ngModel)]="details"
+                    name="details"
+                    class=" form-control"
+                    placeholder="Details"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class=" card-footer">
+          <button
+            (click)="save()"
+            [disabled]="!submitbtn"
+            class=" btn btn-fill btn-danger"
+            type="submit"
+          >
+            Submit
+          </button>
+          <div id="loader"></div>
+          <div id="confirmation" style="display: none;">
+            New Gate Pass Created!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<!-- <div>
+  <form action="" id="login_form" method="POST" novalidate="">
+    <fieldset>
+      <legend>Log In</legend>
+      <div class="form-group">
+        <label class="control-label" for="user_username">Username:</label>
+        <input autofocus="" class="form-control" id="user_username" name="user_username" type="text">
+      </div>
+        <div class="form-group">
+          <label class="control-label" for="user_password">Password:</label>
+          <input class="form-control" id="user_password" name="user_password" type="password">
+        </div>
+          <div>
+            <input id="continue" type="submit" value="Continue">
+          </div>
+        </fieldset>
+      </form>
+    </div> -->
+    <style>
+      #sso-root{
+        position: relative;
+        top: 50%;
+        left: 50%;
+        width: 204.19px;
+        margin: 0;
+        padding: 0;
+      }
+    #loader {
+      display: none;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 150px;
+      height: 150px;
+      margin: -75px 0 0 -75px;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+    
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    </style>
+    <div id="loader"></div>
+    <div id="sso-root" style="margin: 300px 0px 0px -80px;">
+        <iframe id="sso-iframe" src="//gymkhana.iitb.ac.in/sso/widget/login/?client_id=yBd1hkLXDPwh160FY2YvFc42tD0iUyx4Mn9w4FYT&redirect_uri=https://gatepass.moodi.org&amp;response_type=code&amp;scope=basic profile picture sex ldap phone insti_address program&amp;state=&amp;new_window=false&amp;button_div_bg_color=303F9F&amp;button_anchor_color=FFFFFF&amp;logout_anchor_color=727272" frameborder="0" scrolling="No" ></iframe>
+      </div>

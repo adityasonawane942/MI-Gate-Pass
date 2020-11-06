@@ -1,0 +1,62 @@
+<style>
+  #loader {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+  
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  </style>
+<div style="color: wheat; width: 50%; text-align: center; position: relative; left: 25%;"><br>
+    <form action="" id="reg_form" method="POST" novalidate="">
+      <fieldset>
+        <legend style="font-size: 30px;">Register</legend>
+        <div class="form-group">
+          <label class="control-label" for="user_mobileno">Mobile No.</label>
+          <input autofocus="" class="form-control" [(ngModel)]="mobileno" id="user_mobileno" name="user_mobileno" type="text">
+        </div>
+          <div class="form-group">
+            <label class="control-label" for="user_dept">Department</label><br>
+            <select [(ngModel)]="dept" style="font-size: 20px;" name="dept">
+                <option value="Creatives">Creatives</option>
+                <option value="Fnb">Fnb</option>
+                <option value="Compi">Compi</option>
+                <option value="Hospi">Services</option>
+                <option value="Hospi">Hospi</option>
+                <option value="Hospi">Horizons</option>
+                <option value="Hospi">Marketing</option>
+                <option value="Hospi">Media</option>
+                <option value="Hospi">Informals</option>
+                <option value="Hospi">Pronites</option>
+              </select>
+              <br><br>
+              <!-- <input class="form-control" id="user_dept" name="user_dept" type="submit"> -->
+            <!-- <input class="form-control" id="user_dept" name="user_dept" type="password"> -->
+          </div>
+            <div>
+              <button class="btn" type="submit" id="continue" form="reg_form" (click)="submit()">Continue</button>4
+              <div id="loader"></div>
+            </div>
+          </fieldset>
+        </form>
+      </div>

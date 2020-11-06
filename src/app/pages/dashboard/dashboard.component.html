@@ -1,0 +1,195 @@
+<style>
+    #loader {
+      display: none;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 150px;
+      height: 150px;
+      margin: -75px 0 0 -75px;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+    
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .filterDiv {
+      display: none;
+    }
+
+    .show {
+      display: block;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    #search{
+      width: 100%;
+      font-size: 20px;
+      border: 2px solid red;
+      border-radius: 15px;
+      outline: 0;
+      text-align: center;
+    }
+
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      text-align: center;
+    }
+  
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      text-align: center;
+    }
+      
+    ::-ms-input-placeholder { /* Microsoft Edge */
+      text-align: center;
+    }
+    </style>
+    
+<div class=" content">
+  <div class=" row">
+    <div class=" col-12">
+        <div class="row">
+            <div class=" col-sm-6 text-left">
+            </div>
+            <div class=" col-sm-6">
+              <div
+                class=" btn-group btn-group-toggle float-right"
+              >
+                <label id="pendingb" style="color: white;" class=" btn btn-sm btn-danger btn-simple" (click)="showpending()">
+                  <input checked="checked" name="options" type="radio" />
+
+                  <span
+                    class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >
+                    Pending
+                  </span>
+                  <span class=" d-block d-sm-none">
+                    Pending
+                  </span>
+                </label>
+                
+                <label id="approvedb" class=" btn btn-sm btn-danger btn-simple" (click)="showapproved()">
+                  
+
+                  <span
+                    class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >
+                    Approved
+                  </span>
+                  <span class=" d-block d-sm-none">
+                    Approved
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="padding: 3%;">
+              <input type="text" name="search" id="search" [(ngModel)]="department" placeholder="Search">
+          </div>
+    <div id="pending">
+        <div *ngFor="let pass of passdata | deptlist: department">
+            <div class="card" *ngIf="!pass.approval_status" >
+          <div class="card-header" style="text-align: center;">
+              {{pass.pass_number}}
+          </div>
+          <div class="card-body">
+              <div *ngIf="profiledata.approval_access" class=" btn-group btn-group-toggle float-right">
+                  <label (click)="approve(pass.pass_number)" class=" btn btn-sm btn-danger btn-simple">
+                      <span
+                      class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                    >
+                      Approve
+                    </span>
+                    <span class=" d-block d-sm-none">
+                      Approve
+                    </span>
+                  </label>
+                  <div id="loader"></div>
+              </div>
+              <p>Party Name : {{pass.party_name}}</p>
+              <p>Vehicle No : {{pass.vehicle_no}}</p>
+              <p>Names of Visitors : {{pass.name_of_visitors}}</p>
+              <p>Details of Equipments : {{pass.details_of_equipments}}</p>
+              <p>Date : {{pass.date}}</p>
+              <p>Department : {{pass.department}}</p>
+              <p>Created By : {{pass.user}}</p>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div id="approved" style="display: none;">
+        <div *ngFor="let pass of passdata | deptlist: department">
+          <div class="card"  *ngIf="pass.approval_status">
+          <div class="card-header" style="text-align: center;">
+            {{pass.pass_number}}
+          </div>
+          <div class="card-body">
+              <div class=" btn-group btn-group-toggle float-right">
+                  <!-- <label *ngIf="profiledata.approval_access" (click)="disapprove(pass.pass_number)" class=" btn btn-sm btn-danger btn-simple">
+                      <span
+                      class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                    >
+                      Disapprove
+                    </span>
+                    <span class=" d-block d-sm-none">
+                      Disapprove
+                    </span>
+                  </label>  -->
+                  <label (click)="generatePdf('download', pass.pass_number, pass.party_name, pass.date, pass.department, pass.name_of_visitors, pass.details_of_equipments, pass.vehicle_no, pass.user, pass.approvedby)" class=" btn btn-sm btn-danger btn-simple">
+                      <span
+                      class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                    >
+                      Download
+                    </span>
+                    <span class=" d-block d-sm-none">
+                      Download
+                    </span>
+                  </label>
+                  <label (click)="generatePdf('open', pass.pass_number, pass.party_name, pass.date, pass.department, pass.name_of_visitors, pass.details_of_equipments, pass.vehicle_no, pass.user, pass.approvedby)" class=" btn btn-sm btn-danger btn-simple">
+                      <span
+                      class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                    >
+                      Open
+                    </span>
+                    <span class=" d-block d-sm-none">
+                      Open
+                    </span>
+                  </label>
+              </div><br><br>
+              <p>Party Name : {{pass.party_name}}</p>
+              <p>Vehicle No : {{pass.vehicle_no}}</p>
+              <p>Names of Visitors : {{pass.name_of_visitors}}</p>
+              <p>Details of Equipments : {{pass.details_of_equipments}}</p>
+              <p>Date : {{pass.date}}</p>
+              <p>Department : {{pass.department}}</p>
+              <p>Approved By : {{pass.approvedby}}</p>
+              <p>Created By : {{pass.user}}</p>
+          </div>
+        </div>
+      </div>
+      </div>
